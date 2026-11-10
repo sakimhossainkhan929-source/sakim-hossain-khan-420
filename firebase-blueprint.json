@@ -1,0 +1,83 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Registered citizen profile managed securely via Firebase Auth and Firestore.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "fullName": { "type": "string", "maxLength": 100 },
+        "email": { "type": "string", "maxLength": 120 },
+        "phone": { "type": "string", "maxLength": 20 },
+        "role": { "type": "string", "enum": ["customer", "admin"] },
+        "createdAt": { "type": "string", "maxLength": 50 },
+        "updatedAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["id", "fullName", "email", "role"]
+    },
+    "Admin": {
+      "title": "Admin Role Guard",
+      "description": "Secure document that grants administrative privileges.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 120 },
+        "grantedAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["uid", "email"]
+    },
+    "PanApplication": {
+      "title": "Citizen Application",
+      "description": "PAN and citizen facilitation application records.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "applicantName": { "type": "string", "maxLength": 100 },
+        "applicantEmail": { "type": "string", "maxLength": 120 },
+        "applicantPhone": { "type": "string", "maxLength": 20 },
+        "serviceType": { "type": "string", "maxLength": 50 },
+        "status": { "type": "string", "enum": ["draft", "submitted", "under_review", "verified", "processing", "approved", "rejected", "dispatched"] },
+        "ackNumber": { "type": "string", "maxLength": 50 },
+        "fee": { "type": "number" },
+        "paymentStatus": { "type": "string", "enum": ["pending", "completed", "failed"] },
+        "createdAt": { "type": "string", "maxLength": 50 },
+        "updatedAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["id", "userId", "applicantName", "serviceType", "status"]
+    },
+    "Notification": {
+      "title": "User Notification",
+      "description": "System and status update notifications for users.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 150 },
+        "message": { "type": "string", "maxLength": 500 },
+        "date": { "type": "string", "maxLength": 50 },
+        "read": { "type": "boolean" },
+        "type": { "type": "string", "maxLength": 30 }
+      },
+      "required": ["id", "userId", "title", "message", "read"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "User" },
+      "description": "Private user profiles. Accessible only by owner or admins."
+    },
+    "/admins/{adminId}": {
+      "schema": { "$ref": "Admin" },
+      "description": "Protected admin whitelist documents. Read-only for admins."
+    },
+    "/applications/{applicationId}": {
+      "schema": { "$ref": "PanApplication" },
+      "description": "Citizen application records. Users access own records; admins access all."
+    },
+    "/notifications/{notificationId}": {
+      "schema": { "$ref": "Notification" },
+      "description": "Notifications for individual users."
+    }
+  }
+}

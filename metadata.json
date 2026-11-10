@@ -1,0 +1,6 @@
+{
+  "name": "SAKIM Digital Seva Kendra",
+  "description": "SAKIM Digital Seva Kendra – Complete Citizen & Government Digital Services Portal for PAN cards, Aadhaar, Welfare Schemes, Certificates, and Identity Services.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
