@@ -824,18 +824,19 @@ export const CustomerDashboard: React.FC<CustomerDashboardProps> = ({
         {/* Section Header & Category Filters */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 bg-gradient-to-r from-[#091845] via-[#051136] to-[#040c26] p-4 rounded-2xl border-2 border-amber-400/70 shadow-xl">
           <div className="space-y-1">
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full gold-badge-gradient text-xs sm:text-sm font-black tracking-wide uppercase shadow">
                 <span>★</span>
                 <span>All Citizen Services & Government Schemes</span>
                 <span>★</span>
               </span>
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">
-                34 New Services (Demo Mode)
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                <span>34 Services Connected to Official Portals</span>
               </span>
             </div>
             <p className="text-xs text-slate-300">
-              Complete citizen service catalog: Identity, Welfare Schemes, State Certificates, and Public Utilities.
+              Click any service card to open its verified official government portal directly in a secure new browser tab.
             </p>
           </div>
 
@@ -897,36 +898,66 @@ export const CustomerDashboard: React.FC<CustomerDashboardProps> = ({
         {/* 34 3D Glossy Cards Grid Matching Exact Aadhaar & PAN Card Style */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2.5 sm:gap-3">
           {filteredNewServices.map((srv) => (
-            <button
+            <div
               key={srv.id}
-              type="button"
               onClick={() => {
-                setSelectedNewService(srv);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                if (srv.officialUrl) {
+                  window.open(srv.officialUrl, '_blank', 'noopener,noreferrer');
+                } else {
+                  setSelectedNewService(srv);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
               }}
-              title={`${srv.nameEn} – Demo Mode (Click to open dedicated service page)`}
-              className={`seva-card-3d relative group ${srv.gradientClass} ${srv.borderClass} p-3 sm:p-3.5 flex flex-col items-center justify-center text-center cursor-pointer shadow-lg w-full transition-transform hover:-translate-y-1`}
+              title={`${srv.nameEn} – Official Government Portal: ${srv.officialUrl || 'Pending'} (Click to Open in New Tab)`}
+              className={`seva-card-3d relative group ${srv.gradientClass} ${srv.borderClass} p-3 sm:p-3.5 flex flex-col items-center justify-between text-center cursor-pointer shadow-lg w-full transition-transform hover:-translate-y-1 min-h-[145px]`}
             >
-              {/* Discrete Demo Mode Tag required by User Specification */}
-              <span className="absolute top-1.5 right-1.5 px-1.5 py-0.2 rounded text-[8px] font-black uppercase tracking-wider bg-black/60 text-amber-300 border border-amber-400/40">
-                Demo
-              </span>
+              {/* Official Connected or Demo Tag */}
+              {srv.officialUrl ? (
+                <span className="absolute top-1.5 right-1.5 px-1.5 py-0.5 rounded text-[8px] font-black uppercase tracking-wider bg-emerald-950/90 text-emerald-300 border border-emerald-400/50 flex items-center gap-0.5 shadow">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  GOV
+                </span>
+              ) : (
+                <span className="absolute top-1.5 right-1.5 px-1.5 py-0.5 rounded text-[8px] font-black uppercase tracking-wider bg-black/60 text-amber-300 border border-amber-400/40">
+                  Demo
+                </span>
+              )}
 
               {/* Glossy 3D Icon */}
-              <div className="mb-1.5 flex items-center justify-center transform group-hover:scale-110 transition-transform">
+              <div className="mb-1 flex items-center justify-center transform group-hover:scale-110 transition-transform">
                 {getNewServiceIcon(srv.iconType)}
               </div>
 
-              {/* English Service Name */}
-              <h3 className="text-xs sm:text-[13px] font-black text-white leading-tight drop-shadow tracking-tight">
-                {srv.nameEn}
-              </h3>
+              {/* Names */}
+              <div className="space-y-0.5 w-full">
+                <h3 className="text-xs sm:text-[13px] font-black text-white leading-tight drop-shadow tracking-tight">
+                  {srv.nameEn}
+                </h3>
+                <p className="text-[10px] sm:text-[11px] font-semibold text-white/90 drop-shadow">
+                  {srv.nameHi}
+                </p>
+              </div>
 
-              {/* Hindi Service Name */}
-              <p className="text-[10px] sm:text-[11px] font-semibold text-white/90 drop-shadow mt-0.5">
-                {srv.nameHi}
-              </p>
-            </button>
+              {/* Quick Guidance / Docs Touch Target */}
+              <div className="w-full pt-1.5 mt-1 border-t border-white/10 flex items-center justify-between text-[9px] font-bold text-amber-300">
+                <span className="flex items-center gap-0.5 opacity-90 group-hover:opacity-100">
+                  <span>Open Portal</span>
+                  <ExternalLink className="w-2.5 h-2.5" />
+                </span>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedNewService(srv);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  title="View Required Documents & Application Guidelines"
+                  className="px-1.5 py-0.5 rounded bg-black/40 hover:bg-black/80 text-[8px] text-slate-200 border border-white/20 hover:text-white transition"
+                >
+                  Docs ℹ
+                </button>
+              </div>
+            </div>
           ))}
         </div>
       </section>
@@ -1453,10 +1484,22 @@ export const CustomerDashboard: React.FC<CustomerDashboardProps> = ({
               </p>
             </div>
 
-            <div className="flex items-center gap-2 pt-2">
+            {genericServiceModal.officialUrl ? (
+              <a
+                href={genericServiceModal.officialUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full gold-btn py-2.5 rounded-xl text-xs font-black shadow flex items-center justify-center gap-1.5 no-underline text-slate-950 hover:brightness-110 transition"
+              >
+                <span>Open Official Government Portal</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            ) : null}
+
+            <div className="flex items-center gap-2 pt-1">
               <a
                 href="tel:+919876543210"
-                className="w-1/2 py-2.5 rounded-xl bg-blue-900/70 hover:bg-blue-800 text-blue-200 border border-blue-700 text-xs font-bold text-center transition flex items-center justify-center gap-1.5"
+                className="flex-1 py-2 rounded-xl bg-blue-900/70 hover:bg-blue-800 text-blue-200 border border-blue-700 text-xs font-bold text-center transition flex items-center justify-center gap-1.5"
               >
                 <PhoneCall className="w-3.5 h-3.5 text-amber-400" />
                 <span>Call Helpdesk</span>
@@ -1467,7 +1510,7 @@ export const CustomerDashboard: React.FC<CustomerDashboardProps> = ({
                   setGenericServiceModal(null);
                   setPanPickerOpen(true);
                 }}
-                className="w-1/2 gold-btn py-2.5 rounded-xl text-xs font-black shadow flex items-center justify-center gap-1"
+                className="flex-1 gold-btn py-2 rounded-xl text-xs font-black shadow flex items-center justify-center gap-1"
               >
                 <span>Filing Counter</span>
                 <ArrowRight className="w-3.5 h-3.5" />

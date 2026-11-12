@@ -46,18 +46,28 @@ import {
   X
 } from 'lucide-react';
 
+// Default citizen profile to directly open Dashboard without login screen block
+const DEFAULT_CITIZEN_PROFILE: UserProfile = {
+  id: 'citizen-active-1',
+  name: 'Citizen Portal',
+  email: 'sakimhossaink@gmail.com',
+  mobile: '9876543210',
+  role: 'customer',
+  state: 'West Bengal',
+  createdAt: '2026-11-10T00:00:00Z'
+};
+
 export default function App() {
-  // Initialization
-  const [currentUser, setCurrentUser] = useState<UserProfile | null>(() => {
+  // Initialization - Directly open with active citizen profile (Bypassing login screen)
+  const [currentUser, setCurrentUser] = useState<UserProfile>(() => {
     StorageService.init();
-    return StorageService.getCurrentUser();
+    return StorageService.getCurrentUser() || DEFAULT_CITIZEN_PROFILE;
   });
 
-  const [currentView, setCurrentView] = useState<'home' | 'dashboard' | 'admin' | 'services' | 'support'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'dashboard' | 'admin' | 'services' | 'support'>('dashboard');
   const [applications, setApplications] = useState<PanApplication[]>(() => StorageService.getApplications());
   const [notifications, setNotifications] = useState<AppNotification[]>(() => {
-    const userId = currentUser ? currentUser.id : 'all';
-    return StorageService.getNotifications(userId);
+    return StorageService.getNotifications(currentUser.id);
   });
 
   // Modals state
@@ -74,14 +84,14 @@ export default function App() {
   const [loginRolePreference, setLoginRolePreference] = useState<UserRole>('customer');
   const [qrModalOpen, setQrModalOpen] = useState(false);
 
-  // Real-Time Firebase Auth Session Listener & Persistence
+  // Real-Time Firebase Auth Session Listener & Persistence (Preserved)
   useEffect(() => {
     const unsubscribe = FirebaseService.onAuthStateChange(async (fbUser) => {
       if (fbUser) {
         const isAdmin = await checkIsAdmin(fbUser);
         let profile: UserProfile = {
           id: fbUser.uid,
-          name: fbUser.displayName || fbUser.email?.split('@')[0] || 'Citizen',
+          name: fbUser.displayName || fbUser.email?.split('@')[0] || 'Citizen User',
           email: fbUser.email || '',
           mobile: fbUser.phoneNumber || '',
           role: isAdmin ? 'admin' : 'customer',
@@ -97,10 +107,6 @@ export default function App() {
         StorageService.setCurrentUser(profile);
         setCurrentUser(profile);
         await refreshData(profile);
-      } else {
-        StorageService.setCurrentUser(null);
-        setCurrentUser(null);
-        setCurrentView('home');
       }
     });
 
@@ -184,7 +190,7 @@ export default function App() {
     }
   };
 
-  // Secure Logout
+  // Secure Logout (Resets session to default citizen access)
   const handleLogout = async () => {
     try {
       await FirebaseService.logout();
@@ -192,16 +198,12 @@ export default function App() {
       console.warn('Firebase logout notice:', e);
     }
     StorageService.setCurrentUser(null);
-    setCurrentUser(null);
-    setCurrentView('home');
+    setCurrentUser(DEFAULT_CITIZEN_PROFILE);
+    setCurrentView('dashboard');
   };
 
-  // Open Service form (Requires genuine authentication)
+  // Open Service form directly
   const handleSelectService = (service: ServiceType) => {
-    if (!currentUser) {
-      setRegisterModalOpen(true);
-      return;
-    }
     setActiveServiceModal(service);
   };
 
@@ -225,28 +227,19 @@ export default function App() {
       <Header
         currentUser={currentUser}
         onNavigate={(v) => {
-          if (currentUser) {
-            // While logged in, Home, Services, and Dashboard stay within the user's dashboard (never showing login again)
-            if (v === 'dashboard' || v === 'home' || v === 'services') {
-              setCurrentView(currentUser.role === 'admin' ? 'admin' : 'dashboard');
-            } else {
-              setCurrentView(v as any);
-            }
+          if (v === 'support') {
+            setCurrentView('support');
+          } else if (v === 'admin') {
+            setCurrentView('admin');
           } else {
-            if (v === 'support') {
-              setCurrentView('support');
-            } else {
-              setCurrentView('home');
-            }
+            setCurrentView('dashboard');
           }
         }}
         onLoginClick={(role) => {
-          if (!currentUser) {
-            setLoginRolePreference(role || 'customer');
-            setCurrentView('home');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+          if (role === 'admin') {
+            setCurrentView('admin');
           } else {
-            setCurrentView(currentUser.role === 'admin' ? 'admin' : 'dashboard');
+            setCurrentView('dashboard');
           }
         }}
         onLogout={handleLogout}
@@ -259,178 +252,92 @@ export default function App() {
       {/* 2. Legal Transparency & Regulatory Notice Banner */}
       <DisclaimerBanner />
 
-      {/* 3. Main Views: Strict Separation Between Unauthenticated Login Page and Inside Dashboard */}
+      {/* 3. Main Views: Direct Access to Customer Dashboard as Default Home Page */}
       <main className="flex-1">
-        {/* ─────────────────────────────────────────────────────────────
-            A. UNAUTHENTICATED STATE: SHOW LOGIN & REGISTRATION PAGE FIRST
-            (Matching reference image 5b3ade8c-ea53-45b2-9086-866e500e300a.jpg)
-        ───────────────────────────────────────────────────────────── */}
-        {!currentUser ? (
-          <>
-            {currentView === 'support' ? (
-              <div className="max-w-5xl mx-auto py-10 px-4 sm:px-6 space-y-8 animate-in fade-in">
-                <div className="flex items-center justify-between border-b border-blue-900 pb-4">
-                  <div className="space-y-1">
-                    <span className="text-xs font-black uppercase text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/30">
-                      24x7 Customer Support
-                    </span>
-                    <h1 className="text-3xl font-black text-white font-cinzel">
-                      Help & PAN Assistance Center
-                    </h1>
-                    <p className="text-sm text-slate-300">
-                      Dedicated support for New PAN applications, Minor PAN, Major PAN conversion, and Corrections.
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => setCurrentView('home')}
-                    className="gold-btn px-4 py-2 rounded-xl text-xs font-black shadow"
-                  >
-                    « Back to Login
-                  </button>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                  <div className="p-6 rounded-3xl bg-[#08153b] border-2 border-amber-500/40 text-center space-y-3">
-                    <div className="w-12 h-12 rounded-2xl bg-amber-400/20 text-amber-400 flex items-center justify-center mx-auto">
-                      <Phone className="w-6 h-6" />
-                    </div>
-                    <h3 className="font-bold text-white text-base">Toll-Free Helpline</h3>
-                    <p className="text-xs text-slate-300">Call our certified PAN desk for real-time filing support</p>
-                    <a href="tel:+919876543210" className="inline-block gold-btn px-4 py-2 rounded-xl text-xs font-black">
-                      +91-98765-43210
-                    </a>
-                  </div>
-
-                  <div className="p-6 rounded-3xl bg-[#08153b] border-2 border-blue-500/40 text-center space-y-3">
-                    <div className="w-12 h-12 rounded-2xl bg-blue-400/20 text-blue-400 flex items-center justify-center mx-auto">
-                      <Mail className="w-6 h-6" />
-                    </div>
-                    <h3 className="font-bold text-white text-base">Email Processing Desk</h3>
-                    <p className="text-xs text-slate-300">Send self-attested documents or gazette notification copies</p>
-                    <a href="mailto:support@sakim.com" className="inline-block px-4 py-2 rounded-xl bg-blue-900 text-blue-200 border border-blue-700 text-xs font-bold">
-                      support@sakim.com
-                    </a>
-                  </div>
-
-                  <div className="p-6 rounded-3xl bg-[#08153b] border-2 border-emerald-500/40 text-center space-y-3">
-                    <div className="w-12 h-12 rounded-2xl bg-emerald-400/20 text-emerald-400 flex items-center justify-center mx-auto">
-                      <ShieldCheck className="w-6 h-6" />
-                    </div>
-                    <h3 className="font-bold text-white text-base">Speed Post Tracking</h3>
-                    <p className="text-xs text-slate-300">Track delivery of physical PAN card via India Post</p>
-                    <button 
-                      onClick={() => handleOpenTracking()}
-                      className="px-4 py-2 rounded-xl bg-emerald-950 text-emerald-300 border border-emerald-700 text-xs font-bold"
-                    >
-                      Track Dispatch Status
-                    </button>
-                  </div>
-                </div>
+        {currentView === 'support' ? (
+          <div className="max-w-5xl mx-auto py-10 px-4 sm:px-6 space-y-8 animate-in fade-in">
+            <div className="flex items-center justify-between border-b border-blue-900 pb-4">
+              <div className="space-y-1">
+                <span className="text-xs font-black uppercase text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/30">
+                  24x7 Customer Support
+                </span>
+                <h1 className="text-3xl font-black text-white font-cinzel">
+                  Help & PAN Assistance Center
+                </h1>
+                <p className="text-sm text-slate-300">
+                  Dedicated support for New PAN applications, Minor PAN, Major PAN conversion, and Corrections.
+                </p>
               </div>
-            ) : (
-              /* Primary First View: Dedicated Login & Registration Page */
-              <HeroLanding
-                onLogin={handleLogin}
-                onGoogleLogin={handleGoogleLogin}
-                onOpenRegister={() => setRegisterModalOpen(true)}
-                onOpenForgotPassword={() => setForgotPasswordModalOpen(true)}
-                onOpenGovtAuth={(type) => setGovtAuthModalType(type)}
-                initialRole={loginRolePreference}
-              />
-            )}
-          </>
+              <button
+                onClick={() => setCurrentView('dashboard')}
+                className="gold-btn px-4 py-2 rounded-xl text-xs font-black shadow"
+              >
+                « Back to Dashboard
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              <div className="p-6 rounded-3xl bg-[#08153b] border-2 border-amber-500/40 text-center space-y-3">
+                <div className="w-12 h-12 rounded-2xl bg-amber-400/20 text-amber-400 flex items-center justify-center mx-auto">
+                  <Phone className="w-6 h-6" />
+                </div>
+                <h3 className="font-bold text-white text-base">Toll-Free Helpline</h3>
+                <p className="text-xs text-slate-300">Call our certified PAN desk for real-time filing support</p>
+                <a href="tel:+919876543210" className="inline-block gold-btn px-4 py-2 rounded-xl text-xs font-black">
+                  +91-98765-43210
+                </a>
+              </div>
+
+              <div className="p-6 rounded-3xl bg-[#08153b] border-2 border-blue-500/40 text-center space-y-3">
+                <div className="w-12 h-12 rounded-2xl bg-blue-400/20 text-blue-400 flex items-center justify-center mx-auto">
+                  <Mail className="w-6 h-6" />
+                </div>
+                <h3 className="font-bold text-white text-base">Email Processing Desk</h3>
+                <p className="text-xs text-slate-300">Send self-attested documents or gazette notification copies</p>
+                <a href="mailto:support@sakim.com" className="inline-block px-4 py-2 rounded-xl bg-blue-900 text-blue-200 border border-blue-700 text-xs font-bold">
+                  support@sakim.com
+                </a>
+              </div>
+
+              <div className="p-6 rounded-3xl bg-[#08153b] border-2 border-emerald-500/40 text-center space-y-3">
+                <div className="w-12 h-12 rounded-2xl bg-emerald-400/20 text-emerald-400 flex items-center justify-center mx-auto">
+                  <ShieldCheck className="w-6 h-6" />
+                </div>
+                <h3 className="font-bold text-white text-base">Speed Post Tracking</h3>
+                <p className="text-xs text-slate-300">Track delivery of physical PAN card via India Post</p>
+                <button 
+                  onClick={() => handleOpenTracking()}
+                  className="px-4 py-2 rounded-xl bg-emerald-950 text-emerald-300 border border-emerald-700 text-xs font-bold"
+                >
+                  Track Dispatch Status
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : currentView === 'admin' ? (
+          <AdminDashboard
+            currentUser={currentUser}
+            applications={applications}
+            users={StorageService.getUsers()}
+            onRefresh={refreshData}
+            onLogout={handleLogout}
+            onViewApplication={(app) => setDetailsModalApp(app)}
+            onDownloadReceipt={(app) => setReceiptModalApp(app)}
+            onDownloadEPan={(app) => setEPanModalApp(app)}
+          />
         ) : (
-          /* ─────────────────────────────────────────────────────────────
-              B. AUTHENTICATED STATE: CUSTOMER DASHBOARD OR ADMIN DASHBOARD
-              (Zero Login Box inside, only full application management & launcher)
-          ───────────────────────────────────────────────────────────── */
-          <>
-            {currentView === 'support' ? (
-              <div className="max-w-5xl mx-auto py-10 px-4 sm:px-6 space-y-8 animate-in fade-in">
-                <div className="flex items-center justify-between border-b border-blue-900 pb-4">
-                  <div className="space-y-1">
-                    <span className="text-xs font-black uppercase text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/30">
-                      24x7 Customer Support
-                    </span>
-                    <h1 className="text-3xl font-black text-white font-cinzel">
-                      Help & PAN Assistance Center
-                    </h1>
-                    <p className="text-sm text-slate-300">
-                      Dedicated support for New PAN applications, Minor PAN, Major PAN conversion, and Corrections.
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => setCurrentView(currentUser.role === 'admin' ? 'admin' : 'dashboard')}
-                    className="gold-btn px-4 py-2 rounded-xl text-xs font-black shadow"
-                  >
-                    « Back to Dashboard
-                  </button>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                  <div className="p-6 rounded-3xl bg-[#08153b] border-2 border-amber-500/40 text-center space-y-3">
-                    <div className="w-12 h-12 rounded-2xl bg-amber-400/20 text-amber-400 flex items-center justify-center mx-auto">
-                      <Phone className="w-6 h-6" />
-                    </div>
-                    <h3 className="font-bold text-white text-base">Toll-Free Helpline</h3>
-                    <p className="text-xs text-slate-300">Call our certified PAN desk for real-time filing support</p>
-                    <a href="tel:+919876543210" className="inline-block gold-btn px-4 py-2 rounded-xl text-xs font-black">
-                      +91-98765-43210
-                    </a>
-                  </div>
-
-                  <div className="p-6 rounded-3xl bg-[#08153b] border-2 border-blue-500/40 text-center space-y-3">
-                    <div className="w-12 h-12 rounded-2xl bg-blue-400/20 text-blue-400 flex items-center justify-center mx-auto">
-                      <Mail className="w-6 h-6" />
-                    </div>
-                    <h3 className="font-bold text-white text-base">Email Processing Desk</h3>
-                    <p className="text-xs text-slate-300">Send self-attested documents or gazette notification copies</p>
-                    <a href="mailto:support@sakim.com" className="inline-block px-4 py-2 rounded-xl bg-blue-900 text-blue-200 border border-blue-700 text-xs font-bold">
-                      support@sakim.com
-                    </a>
-                  </div>
-
-                  <div className="p-6 rounded-3xl bg-[#08153b] border-2 border-emerald-500/40 text-center space-y-3">
-                    <div className="w-12 h-12 rounded-2xl bg-emerald-400/20 text-emerald-400 flex items-center justify-center mx-auto">
-                      <ShieldCheck className="w-6 h-6" />
-                    </div>
-                    <h3 className="font-bold text-white text-base">Speed Post Tracking</h3>
-                    <p className="text-xs text-slate-300">Track delivery of physical PAN card via India Post</p>
-                    <button 
-                      onClick={() => handleOpenTracking()}
-                      className="px-4 py-2 rounded-xl bg-emerald-950 text-emerald-300 border border-emerald-700 text-xs font-bold"
-                    >
-                      Track Dispatch Status
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ) : currentUser.role === 'admin' || currentView === 'admin' ? (
-              <AdminDashboard
-                currentUser={currentUser}
-                applications={applications}
-                users={StorageService.getUsers()}
-                onRefresh={refreshData}
-                onLogout={handleLogout}
-                onViewApplication={(app) => setDetailsModalApp(app)}
-                onDownloadReceipt={(app) => setReceiptModalApp(app)}
-                onDownloadEPan={(app) => setEPanModalApp(app)}
-              />
-            ) : (
-              <CustomerDashboard
-                currentUser={currentUser}
-                applications={applications.filter(a => a.customerUserId === currentUser.id || a.customerEmail === currentUser.email)}
-                notifications={notifications}
-                onOpenService={handleSelectService}
-                onOpenTracking={(id) => handleOpenTracking(id)}
-                onViewApplication={(app) => setDetailsModalApp(app)}
-                onDownloadReceipt={(app) => setReceiptModalApp(app)}
-                onDownloadEPan={(app) => setEPanModalApp(app)}
-                onRefresh={refreshData}
-                onLogout={handleLogout}
-              />
-            )}
-          </>
+          <CustomerDashboard
+            currentUser={currentUser}
+            applications={applications}
+            notifications={notifications}
+            onOpenService={handleSelectService}
+            onOpenTracking={(id) => handleOpenTracking(id)}
+            onViewApplication={(app) => setDetailsModalApp(app)}
+            onDownloadReceipt={(app) => setReceiptModalApp(app)}
+            onDownloadEPan={(app) => setEPanModalApp(app)}
+            onRefresh={refreshData}
+            onLogout={handleLogout}
+          />
         )}
       </main>
 
@@ -601,7 +508,7 @@ export default function App() {
           <div>
             <p className="text-xs font-bold text-white uppercase tracking-wider mb-2">Quick Navigation</p>
             <ul className="space-y-1 text-[11px]">
-              <li><button onClick={() => setCurrentView('home')} className="hover:text-amber-400">Home & Login</button></li>
+              <li><button onClick={() => setCurrentView('dashboard')} className="hover:text-amber-400">Home Dashboard</button></li>
               <li><button onClick={() => handleOpenTracking()} className="hover:text-amber-400">Track PAN Application Status</button></li>
               <li><button onClick={() => setCurrentView('support')} className="hover:text-amber-400">Helpdesk & Support</button></li>
               <li>

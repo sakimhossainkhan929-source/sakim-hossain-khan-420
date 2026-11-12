@@ -39,7 +39,7 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     badgeColor: 'bg-red-500/20 text-red-300 border-red-500/40',
     description: 'National Voters Service: Register new voter card (Form 6), update details, link Aadhaar with EPIC, and download digital e-EPIC card.',
     officialAuthority: 'Election Commission of India (ECI)',
-    officialUrl: '', // Demo Mode - link not connected
+    officialUrl: 'https://voters.eci.gov.in/',
     subcategories: [
       { id: 'voter_new', nameEn: 'Apply New Voter ID (Form 6)', nameHi: 'नया मतदाता कार्ड आवेदन (प्रारूप 6)', description: 'First-time voter registration for Indian citizens aged 18 years or above.' },
       { id: 'voter_correction', nameEn: 'Correction of Entries (Form 8)', nameHi: 'विवरण संशोधन (प्रारूप 8)', description: 'Update name, date of birth, photo, address, or constituency transfer.' },
@@ -62,7 +62,7 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     badgeColor: 'bg-blue-500/20 text-blue-300 border-blue-500/40',
     description: 'National Digital Document Wallet: Access verified electronic copies of driving licence, registration certificates, academic awards, and PAN cards.',
     officialAuthority: 'Ministry of Electronics & Information Technology (MeitY)',
-    officialUrl: '',
+    officialUrl: 'https://www.digilocker.gov.in/',
     subcategories: [
       { id: 'dl_link_aadhaar', nameEn: 'Link Aadhaar to DigiLocker', nameHi: 'आधार से डिजिलॉker लिंक करें', description: 'Authenticate your DigiLocker vault using 12-digit Aadhaar e-KYC.' },
       { id: 'dl_fetch_docs', nameEn: 'Fetch Government Certificates', nameHi: 'सरकारी प्रमाण पत्र प्राप्त करें', description: 'Pull verified digital records from 2,000+ government issuers.' },
@@ -84,7 +84,7 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     badgeColor: 'bg-orange-500/20 text-orange-300 border-orange-500/40',
     description: 'Unified Mobile Application for New-age Governance: One-stop access to central, state, and local government citizen services.',
     officialAuthority: 'National e-Governance Division (NeGD)',
-    officialUrl: '',
+    officialUrl: 'https://web.umang.gov.in/',
     subcategories: [
       { id: 'umang_epfo', nameEn: 'EPFO Passbook & PF Claim', nameHi: 'ईपीएफओ पासबुक व पीएफ क्लेम', description: 'View monthly PF contributions, member passbook, and submit online claims.' },
       { id: 'umang_gas', nameEn: 'LPG Cylinder Booking & Subsidy', nameHi: 'गैस सिलेंडर बुकिंग व सब्सिडी', description: 'Book Indane, Bharat Gas, and HP Gas refills with instant subsidy tracking.' },
@@ -105,7 +105,7 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     badgeColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40',
     description: 'Parivahan Sarathi: Online Learner Licence test, permanent driving licence slot booking, licence renewal, duplicate DL, and address change.',
     officialAuthority: 'Ministry of Road Transport and Highways (MoRTH)',
-    officialUrl: '',
+    officialUrl: 'https://sarathi.parivahan.gov.in/',
     subcategories: [
       { id: 'dl_learner', nameEn: 'Apply for Learner Licence (LL)', nameHi: 'लर्नर लाइसेंस आवेदन', description: 'Fill Form 2, take online road safety tutorial, and schedule appointment.' },
       { id: 'dl_permanent', nameEn: 'Permanent Driving Licence (DL)', nameHi: 'स्थायी ड्राइविंग लाइसेंस स्लॉट', description: 'Schedule automated driving test slot after 30 days of holding a valid LL.' },
@@ -127,7 +127,7 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     badgeColor: 'bg-teal-500/20 text-teal-300 border-teal-500/40',
     description: 'Passport Seva: Apply for fresh/reissue ordinary passport, Tatkaal appointment booking, Police Clearance Certificate (PCC), and status inquiry.',
     officialAuthority: 'Ministry of External Affairs (MEA)',
-    officialUrl: '',
+    officialUrl: 'https://www.passportindia.gov.in/',
     subcategories: [
       { id: 'ps_fresh', nameEn: 'Apply for Fresh Passport', nameHi: 'नए पासपोर्ट हेतु आवेदन', description: '36-page or 60-page standard booklet application with 10-year validity.' },
       { id: 'ps_tatkaal', nameEn: 'Tatkaal Fast-Track Passport', nameHi: 'तत्काल पासपोर्ट सुविधा', description: 'Expedited processing and appointment scheduling for urgent travel requirements.' },
@@ -147,9 +147,9 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     gradientClass: 'bg-gradient-to-b from-[#7c1694] via-[#540e66] to-[#2c0636]',
     borderClass: 'border-[#e879f9] text-[#e879f9]',
     badgeColor: 'bg-fuchsia-500/20 text-fuchsia-300 border-fuchsia-500/40',
-    description: 'National Food Security (NFSA): Apply for digital ration card, add family members, surrender cards, transfer FPS dealer, and download e-Ration card.',
-    officialAuthority: 'Department of Food & Supplies',
-    officialUrl: '',
+    description: 'National Food Security (NFSA) & West Bengal Food Department: Apply for digital ration card, add family members, transfer FPS dealer, and download e-Ration card.',
+    officialAuthority: 'Department of Food & Supplies, Govt of West Bengal / NFSA',
+    officialUrl: 'https://food.wb.gov.in/',
     subcategories: [
       { id: 'rc_new', nameEn: 'Apply New Digital Ration Card', nameHi: 'नया डिजिटल राशन कार्ड आवेदन', description: 'State NFSA / BPL / AAY subsidized food grains entitlement card.' },
       { id: 'rc_member_add', nameEn: 'Add New Family Member', nameHi: 'नए परिवार के सदस्य का नाम जोड़ें', description: 'Add newborn children or newly married spouses to existing ration cards.' },
@@ -171,7 +171,7 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     badgeColor: 'bg-red-500/20 text-red-300 border-red-500/40',
     description: 'Pradhan Mantri Jan Arogya Yojana: Up to ₹5,00,000 cashless secondary and tertiary hospital treatment per family per year across India.',
     officialAuthority: 'National Health Authority (NHA)',
-    officialUrl: '',
+    officialUrl: 'https://beneficiary.nha.gov.in/',
     subcategories: [
       { id: 'ab_check', nameEn: 'Check Family PM-JAY Eligibility', nameHi: 'परिवार की पात्रता जांचें', description: 'Search SECC-2011 beneficiary list by mobile number or ration card.' },
       { id: 'ab_card_apply', nameEn: 'Ayushman Golden Card Application', nameHi: 'आयुष्मान गोल्डन कार्ड आवेदन', description: 'Generate certified PVC Ayushman Card with biometric/OTP verification.' },
@@ -192,7 +192,7 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     badgeColor: 'bg-purple-500/20 text-purple-300 border-purple-500/40',
     description: 'Ayushman Bharat Digital Mission (ABDM): 14-digit unique health identifier to store, share, and access lab reports and medical prescriptions securely.',
     officialAuthority: 'National Health Authority (NHA)',
-    officialUrl: '',
+    officialUrl: 'https://abha.abdm.gov.in/',
     subcategories: [
       { id: 'abha_create', nameEn: 'Create 14-Digit ABHA Number', nameHi: '14 अंकों का आभा नंबर बनाएं', description: 'Instant generation via Aadhaar or Driving Licence authentication.' },
       { id: 'abha_phr', nameEn: 'Link Health Records & PHR App', nameHi: 'स्वास्थ्य रिकॉर्ड व पर्चे लिंक करें', description: 'Store prescriptions, MRI/CT scans, and diagnostic lab reports digitally.' },
@@ -217,7 +217,7 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     badgeColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40',
     description: 'Financial support, modern toolkits (₹15,000 grant), collateral-free loans (up to ₹3 Lakh at 5% interest), and skill training for 18 traditional artisan trades.',
     officialAuthority: 'Ministry of MSME / Ministry of Skill Development',
-    officialUrl: '',
+    officialUrl: 'https://pmvishwakarma.gov.in/',
     subcategories: [
       { id: 'pmv_register', nameEn: 'Artisan Trade Registration', nameHi: 'कारीगर व शिल्पकार पंजीकरण', description: 'Register under Carpenters, Blacksmiths, Potters, Tailors, and 14 other trades.' },
       { id: 'pmv_toolkit', nameEn: 'Claim ₹15,000 Toolkit Incentive', nameHi: '₹15,000 टूलकिट सहायता क्लेम', description: 'Digital voucher grant to purchase modern equipment and tools.' },
@@ -239,7 +239,7 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     badgeColor: 'bg-amber-500/20 text-amber-300 border-amber-500/40',
     description: 'Rooftop solar subsidy up to ₹78,000 for residential households providing up to 300 units of free electricity every month.',
     officialAuthority: 'Ministry of New & Renewable Energy (MNRE)',
-    officialUrl: '',
+    officialUrl: 'https://pmsuryaghar.gov.in/',
     subcategories: [
       { id: 'pms_apply', nameEn: 'Apply for Rooftop Solar Subsidy', nameHi: 'रूफटॉप सोलर सब्सिडी आवेदन', description: 'Submit consumer details, DISCOM consumer number, and sanctioned load.' },
       { id: 'pms_calculator', nameEn: 'Solar Capacity & Subsidy Calculator', nameHi: 'सोलर क्षमता व सब्सिडी कैलकुलेटर', description: 'Estimate required kW capacity, rooftop area, and exact central subsidy.' },
@@ -260,7 +260,7 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     badgeColor: 'bg-green-500/20 text-green-300 border-green-500/40',
     description: 'Direct income support of ₹6,000 per year in 3 equal installments of ₹2,000 transferred directly to landholding farmer families.',
     officialAuthority: 'Ministry of Agriculture & Farmers Welfare',
-    officialUrl: '',
+    officialUrl: 'https://pmkisan.gov.in/',
     subcategories: [
       { id: 'pmk_new', nameEn: 'New Farmer Registration', nameHi: 'नया किसान पंजीकरण', description: 'Register rural/urban cultivable land records for quarterly income benefit.' },
       { id: 'pmk_status', nameEn: 'Beneficiary & Installment Status', nameHi: 'किस्त व लाभार्थी स्थिति जांचें', description: 'Track 20th and upcoming installment payment status via Aadhaar or Mobile.' },
@@ -282,7 +282,7 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     badgeColor: 'bg-blue-500/20 text-blue-300 border-blue-500/40',
     description: 'Affordable pucca housing assistance for eligible urban (PMAY-U) and rural (PMAY-G) poor with credit-linked interest subsidy up to ₹2.67 Lakhs.',
     officialAuthority: 'Ministry of Housing & Urban Affairs (MoHUA)',
-    officialUrl: '',
+    officialUrl: 'https://pmaymis.gov.in/',
     subcategories: [
       { id: 'pma_apply', nameEn: 'PMAY Urban / Rural Application', nameHi: 'पीएम आवास शहरी व ग्रामीण आवेदन', description: 'Apply for home construction financial grant under BLC/AHP components.' },
       { id: 'pma_search', nameEn: 'Search Beneficiary by Name/Aadhaar', nameHi: 'नाम व आधार से लाभार्थी खोजें', description: 'Verify inclusion in approved PMAY permanent waiting list.' },
@@ -303,7 +303,7 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     badgeColor: 'bg-sky-500/20 text-sky-300 border-sky-500/40',
     description: 'Collateral-free micro loans for non-corporate small businesses in three categories: Shishu (up to ₹50K), Kishor (up to ₹5L), and Tarun (up to ₹10L).',
     officialAuthority: 'Department of Financial Services, Ministry of Finance',
-    officialUrl: '',
+    officialUrl: 'https://www.mudra.org.in/',
     subcategories: [
       { id: 'mudra_shishu', nameEn: 'Apply Shishu Loan (up to ₹50,000)', nameHi: 'शिशु ऋण आवेदन (₹50,000 तक)', description: 'For startups and micro ventures needing seed capital without collateral.' },
       { id: 'mudra_kishor', nameEn: 'Apply Kishor Loan (₹50K to ₹5 Lakh)', nameHi: 'किशोर ऋण आवेदन (₹50K से ₹5L)', description: 'For growing enterprises purchasing inventory, equipment, or machinery.' },
@@ -324,7 +324,7 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     badgeColor: 'bg-pink-500/20 text-pink-300 border-pink-500/40',
     description: 'Deposit-free LPG connection, free first cylinder refill, and free hotplate gas stove for adult women belonging to low-income households.',
     officialAuthority: 'Ministry of Petroleum & Natural Gas',
-    officialUrl: '',
+    officialUrl: 'https://www.pmuy.gov.in/',
     subcategories: [
       { id: 'ujj_apply', nameEn: 'Apply for Free LPG Connection', nameHi: 'मुफ्त एलपीजी कनेक्शन आवेदन', description: 'Submit Ujjwala 2.0 form with minimal documentation and no physical security deposit.' },
       { id: 'ujj_distributor', nameEn: 'Select Nearest LPG Agency', nameHi: 'निकटतम गैस एजेंसी चुनें', description: 'Choose Indane, Bharatgas, or HP Gas distributor serving your PIN code.' },
@@ -345,7 +345,7 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     badgeColor: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40',
     description: 'Working capital micro-loans for street vendors starting from ₹10,000 (1st tranche), ₹20,000 (2nd tranche), to ₹50,000 (3rd tranche) with 7% interest subsidy.',
     officialAuthority: 'Ministry of Housing & Urban Affairs (MoHUA)',
-    officialUrl: '',
+    officialUrl: 'https://pmsvanidhi.mohua.gov.in/',
     subcategories: [
       { id: 'svan_first', nameEn: 'First Tranche Loan (₹10,000)', nameHi: 'प्रथम किस्त ऋण (₹10,000)', description: 'Collateral-free loan with 1-year repayment tenure and 7% annual interest subsidy.' },
       { id: 'svan_second', nameEn: 'Second & Third Tranche (Up to ₹50,000)', nameHi: 'द्वितीय व तृतीय किस्त ऋण (₹50K तक)', description: 'Enhanced loan limit upon timely repayment of earlier loans.' },
@@ -366,7 +366,7 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     badgeColor: 'bg-indigo-500/20 text-indigo-300 border-indigo-500/40',
     description: 'Zero-balance basic savings bank deposit (BSBD) accounts with RuPay debit card, ₹2 Lakh free accident insurance, and ₹10,000 overdraft facility.',
     officialAuthority: 'Department of Financial Services, Ministry of Finance',
-    officialUrl: '',
+    officialUrl: 'https://pmjdy.gov.in/',
     subcategories: [
       { id: 'pjd_account', nameEn: 'Open Zero Balance Bank Account', nameHi: 'जीरो बैलेंस बैंक खाता खोलें', description: 'No minimum balance requirement with paperless e-KYC account opening.' },
       { id: 'pjd_rupay', nameEn: 'Order RuPay Debit Card', nameHi: 'रुपे डेबिट कार्ड ऑर्डर करें', description: 'ATM card with built-in ₹2,00,000 accidental insurance coverage.' },
@@ -387,7 +387,7 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     badgeColor: 'bg-purple-500/20 text-purple-300 border-purple-500/40',
     description: 'Government-guaranteed pension of ₹1,000, ₹2,000, ₹3,000, ₹4,000, or ₹5,000 per month starting at age 60 for unorganized sector workers.',
     officialAuthority: 'Pension Fund Regulatory & Development Authority (PFRDA)',
-    officialUrl: '',
+    officialUrl: 'https://www.npscra.nsdl.co.in/scheme-details.php',
     subcategories: [
       { id: 'apy_subscribe', nameEn: 'Enroll in APY Pension Plan', nameHi: 'एपीवाई पेंशन योजना में नामांकन', description: 'Choose desired monthly pension slab (₹1K to ₹5K) with auto-debit contribution.' },
       { id: 'apy_calculator', nameEn: 'Calculate Monthly Contribution', nameHi: 'मासिक योगदान राशि कैलकुलेटर', description: 'Find required monthly contribution based on current entry age (18 to 40).' },
@@ -407,8 +407,8 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     borderClass: 'border-[#34d399] text-[#34d399]',
     badgeColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40',
     description: 'Public Distribution System (PDS) modernized consumer stores providing high-quality branded grocery items, packaged food, and provisions at subsidized fair rates.',
-    officialAuthority: 'State Department of Food & Civil Supplies',
-    officialUrl: '',
+    officialAuthority: 'State Department of Food & Civil Supplies / Annavitran',
+    officialUrl: 'https://annavitran.nic.in/',
     subcategories: [
       { id: 'ann_quota', nameEn: 'Check Monthly Entitlement & Rates', nameHi: 'मासिक कोटा व रियायती दरें', description: 'View available subsidized provisions, flour, pulses, spices, and oil allotments.' },
       { id: 'ann_dealer', nameEn: 'Find Nearest Annapurna Store', nameHi: 'निकटतम अन्नपूर्णा भंडार खोजें', description: 'Locate certified e-PoS modern fair price stores in your gram panchayat/ward.' },
@@ -429,7 +429,7 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     badgeColor: 'bg-blue-500/20 text-blue-300 border-blue-500/40',
     description: 'National Scholarship Portal (NSP) & State portals: Central Sector, Pre-Matric, Post-Matric, and Merit-cum-Means financial grants for students.',
     officialAuthority: 'Ministry of Education / Ministry of Minority Affairs / Social Justice',
-    officialUrl: '',
+    officialUrl: 'https://scholarships.gov.in/',
     subcategories: [
       { id: 'sch_pre', nameEn: 'Pre-Matric Scholarship (Class 1-10)', nameHi: 'प्री-मैट्रिक छात्रवृत्ति (कक्षा 1-10)', description: 'Financial support for school fees, books, and educational kits.' },
       { id: 'sch_post', nameEn: 'Post-Matric Scholarship (Class 11+)', nameHi: 'पोस्ट-मैट्रिक छात्रवृत्ति (कक्षा 11+)', description: 'College, university, ITI, diploma, and degree course fee reimbursement.' },
@@ -451,7 +451,7 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     badgeColor: 'bg-green-500/20 text-green-300 border-green-500/40',
     description: 'Building and Other Construction Workers (BOCW) welfare board financial grants, accident relief, daughter marriage aid, and children educational stipends.',
     officialAuthority: 'State Labour Welfare Board / BOCW Welfare Board',
-    officialUrl: '',
+    officialUrl: 'https://labour.wb.gov.in/',
     subcategories: [
       { id: 'lab_bocw', nameEn: 'BOCW Worker Registration', nameHi: 'बीओसीडब्ल्यू श्रमिक नया पंजीकरण', description: 'Register construction, masonry, carpentry, electrical, and plumbing workers.' },
       { id: 'lab_marriage', nameEn: 'Daughter Marriage Grant (₹50,000)', nameHi: 'पुत्री विवाह सहायता (₹50,000)', description: 'Financial grant towards marriage expenses of registered worker daughters.' },
@@ -477,7 +477,7 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     badgeColor: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40',
     description: 'Civil Registration System (CRS): Official record of birth for school admission, passport, driving licence, and proof of age.',
     officialAuthority: 'Registrar General of India / Municipal Health Department',
-    officialUrl: '',
+    officialUrl: 'https://janma-mrityutathya.wb.gov.in/',
     subcategories: [
       { id: 'bc_apply', nameEn: 'Apply for New Birth Certificate', nameHi: 'नया जन्म प्रमाण पत्र आवेदन', description: 'Registration within 21 days or delayed order registration via Magistrate.' },
       { id: 'bc_download', nameEn: 'Download Digitally Signed Certificate', nameHi: 'डिजिटली हस्ताक्षरित प्रमाण पत्र', description: 'Download instant QR-coded verified birth certificate with digital seal.' },
@@ -498,7 +498,7 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     badgeColor: 'bg-slate-500/20 text-slate-300 border-slate-500/40',
     description: 'Official death certificate for property mutation, insurance settlement, bank account claim, and family pension transfer.',
     officialAuthority: 'Municipal Corporation / Gram Panchayat Registrar',
-    officialUrl: '',
+    officialUrl: 'https://janma-mrityutathya.wb.gov.in/',
     subcategories: [
       { id: 'dc_apply', nameEn: 'Death Certificate Registration', nameHi: 'मृत्यु प्रमाण पत्र नया पंजीकरण', description: 'Report event of death within statutory period with cremation/burial slip.' },
       { id: 'dc_download', nameEn: 'Download e-Death Certificate', nameHi: 'ई-मृत्यु प्रमाण पत्र डाउनलोड', description: 'Download verified copy for bank settlement and legal heir proceedings.' },
@@ -519,7 +519,7 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     badgeColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40',
     description: 'Revenue department certificate establishing annual household income for government scholarships, reservations, EWS quota, and fee waivers.',
     officialAuthority: 'Revenue Department / Tehsildar Office',
-    officialUrl: '',
+    officialUrl: 'https://edistrict.wb.gov.in/',
     subcategories: [
       { id: 'ic_apply', nameEn: 'Apply for Family Income Certificate', nameHi: 'पारिवारिक आय प्रमाण पत्र आवेदन', description: 'Income assessment verified by Revenue Patwari / Circle Officer.' },
       { id: 'ic_download', nameEn: 'Download Verified Income Certificate', nameHi: 'सत्यापित आय प्रमाण पत्र डाउनलोड', description: 'Download digitally signed certificate valid across all universities and banks.' },
@@ -540,7 +540,7 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     badgeColor: 'bg-fuchsia-500/20 text-fuchsia-300 border-fuchsia-500/40',
     description: 'Statutory proof of belonging to Scheduled Caste (SC), Scheduled Tribe (ST), or Other Backward Classes (OBC) for affirmative reservation benefits.',
     officialAuthority: 'Sub-Divisional Officer (SDO) / Sub-Divisional Magistrate (SDM)',
-    officialUrl: '',
+    officialUrl: 'https://castcertificatewb.gov.in/',
     subcategories: [
       { id: 'cc_apply', nameEn: 'Apply SC / ST / OBC Certificate', nameHi: 'एससी/एसटी/ओबीसी प्रमाण पत्र आवेदन', description: 'State and Central format certificate issuance for admissions and recruitments.' },
       { id: 'cc_ncl', nameEn: 'OBC Non-Creamy Layer (NCL) Certificate', nameHi: 'ओबीसी नॉन-क्रीमी लेयर प्रमाण पत्र', description: 'Annual NCL certificate establishing family income is below ₹8 Lakhs threshold.' },
@@ -561,7 +561,7 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     badgeColor: 'bg-blue-500/20 text-blue-300 border-blue-500/40',
     description: 'Local residence / ordinary residence certificate establishing current living address within the municipality or gram panchayat.',
     officialAuthority: 'Revenue Department / Municipal Administration',
-    officialUrl: '',
+    officialUrl: 'https://edistrict.wb.gov.in/',
     subcategories: [
       { id: 'rc_apply', nameEn: 'Apply for Ordinary Residence Certificate', nameHi: 'स्थानीय निवास प्रमाण पत्र आवेदन', description: 'Attested residence proof for bank account, job application, and electricity connection.' },
       { id: 'rc_download', nameEn: 'Download Digital Residence Certificate', nameHi: 'डिजिटल निवास प्रमाण पत्र डाउनलोड', description: 'Download verified digital certificate with official QR code verification.' }
@@ -581,7 +581,7 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     badgeColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40',
     description: 'Permanent Domicile (Mool Niwas) certificate establishing permanent domicile in the state for state government quota, public service commission, and education.',
     officialAuthority: 'District Magistrate / Sub-Divisional Officer (SDO)',
-    officialUrl: '',
+    officialUrl: 'https://edistrict.wb.gov.in/',
     subcategories: [
       { id: 'dom_apply', nameEn: 'Apply for Permanent Domicile Certificate', nameHi: 'मूल निवास प्रमाण पत्र आवेदन', description: 'Establish state domicile by birth or continuous residence of 10-15 years.' },
       { id: 'dom_track', nameEn: 'Track Tehsildar & SDM Inquiry', nameHi: 'तहसीलदार व एसडीएम जांच ट्रैक करें', description: 'Real-time police and revenue patwari verification tracking.' }
@@ -601,7 +601,7 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     badgeColor: 'bg-amber-500/20 text-amber-300 border-amber-500/40',
     description: 'Income and Asset Certificate for Economically Weaker Sections (EWS) to claim 10% reservation in civil posts and educational institutions under Constitution Amendment 103.',
     officialAuthority: 'District Magistrate / Additional District Magistrate / Tehsildar',
-    officialUrl: '',
+    officialUrl: 'https://edistrict.wb.gov.in/',
     subcategories: [
       { id: 'ews_apply', nameEn: 'Apply for EWS Income & Asset Certificate', nameHi: 'ईडब्ल्यूएस आय व संपत्ति प्रमाण पत्र', description: 'Annual family income below ₹8 Lakh and residential asset criteria check.' },
       { id: 'ews_download', nameEn: 'Download Central / State EWS Certificate', nameHi: 'केंद्रीय व राज्य ईडब्ल्यूएस डाउनलोड', description: 'Official valid certificate for UPSC, SSC, JEE, NEET, and banking exams.' }
@@ -621,7 +621,7 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     badgeColor: 'bg-pink-500/20 text-pink-300 border-pink-500/40',
     description: 'Legal registration under Hindu Marriage Act / Special Marriage Act for spouse visa, joint bank accounts, passport name change, and property succession.',
     officialAuthority: 'Registrar of Marriages / Sub-Registrar Office (IGR)',
-    officialUrl: '',
+    officialUrl: 'https://rgmwb.gov.in/',
     subcategories: [
       { id: 'mc_apply', nameEn: 'Apply for Marriage Registration', nameHi: 'विवाह पंजीकरण नया आवेदन', description: 'Online application with joint photograph, wedding card, and witness details.' },
       { id: 'mc_slot', nameEn: 'Book Sub-Registrar Office Slot', nameHi: 'सब-रजिस्ट्रार कार्यालय स्लॉट बुक करें', description: 'Select preferred physical appearance date for biometric verification.' },
@@ -646,7 +646,7 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     badgeColor: 'bg-blue-500/20 text-blue-300 border-blue-500/40',
     description: 'Employees Provident Fund: View member passbook balance, submit online PF advance withdrawal (Form 31), transfer PF (Form 13), and file e-Nomination.',
     officialAuthority: 'Employees Provident Fund Organisation (EPFO)',
-    officialUrl: '',
+    officialUrl: 'https://unifiedportal-mem.epfindia.gov.in/memberinterface/',
     subcategories: [
       { id: 'epf_passbook', nameEn: 'View EPF Member Passbook', nameHi: 'ईपीएफ पासबुक व बैलेंस जांचें', description: 'Real-time statement of employer and employee contributions with interest.' },
       { id: 'epf_claim', nameEn: 'Online PF Withdrawal (Form 31/19/10C)', nameHi: 'ऑनलाइन पीएफ निकासी क्लेम', description: 'Submit advance claim for illness, marriage, house purchase, or final settlement.' },
@@ -668,7 +668,7 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     badgeColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40',
     description: 'Employees State Insurance: Social security health coverage, Pehchan identity card download, dispensary appointment, sickness benefit, and maternity relief.',
     officialAuthority: 'Employees State Insurance Corporation (ESIC)',
-    officialUrl: '',
+    officialUrl: 'https://www.esic.gov.in/',
     subcategories: [
       { id: 'esic_card', nameEn: 'Download e-Pehchan Identity Card', nameHi: 'ई-पहचान पत्र डाउनलोड', description: 'Digital health insurance card for insured person and dependent family.' },
       { id: 'esic_dispensary', nameEn: 'Find Empanelled ESIC Dispensaries', nameHi: 'निकटतम ईएसआईसी औषधालय खोजें', description: 'Free outpatient consultations, specialist referrals, and medicine dispensing.' },
@@ -689,7 +689,7 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     badgeColor: 'bg-red-500/20 text-red-300 border-red-500/40',
     description: 'National Career Service & Central/State job notifications: UPSC, SSC, Railways, Banking (IBPS/SBI), Defence, Teaching, and State Public Service Commissions.',
     officialAuthority: 'National Career Service (NCS) / Staff Selection Commission',
-    officialUrl: '',
+    officialUrl: 'https://www.ncs.gov.in/',
     subcategories: [
       { id: 'job_notifications', nameEn: 'Latest Active Government Vacancies', nameHi: 'नवीनतम सरकारी भर्ती विज्ञापन', description: 'Notifications categorized by 10th pass, 12th pass, Graduate, and Technical.' },
       { id: 'job_admit', nameEn: 'Download Admit Card & Hall Ticket', nameHi: 'प्रवेश पत्र व हॉल टिकट डाउनलोड', description: 'Direct links for upcoming examination centers and roll numbers.' },
@@ -710,7 +710,7 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     badgeColor: 'bg-sky-500/20 text-sky-300 border-sky-500/40',
     description: 'Indian Railways: IRCTC online ticket booking, real-time 10-digit PNR status enquiry, train live running status, coach seat maps, and UTS unreserved tickets.',
     officialAuthority: 'Indian Railway Catering & Tourism Corporation (IRCTC)',
-    officialUrl: '',
+    officialUrl: 'https://www.irctc.co.in/',
     subcategories: [
       { id: 'rail_pnr', nameEn: 'Check 10-Digit PNR Status', nameHi: '10 अंकों का पीएनआर स्टेटस', description: 'Real-time reservation confirmation status, coach, and berth allocation.' },
       { id: 'rail_live', nameEn: 'Live Train Running Status', nameHi: 'ट्रेन की लाइव स्थिति ट्रैक करें', description: 'GPS train tracker showing current station arrival, departure, and delays.' },
@@ -730,9 +730,9 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     gradientClass: 'bg-gradient-to-b from-[#e06602] via-[#a34a00] to-[#542500]',
     borderClass: 'border-[#fb923c] text-[#fb923c]',
     badgeColor: 'bg-amber-500/20 text-amber-300 border-amber-500/40',
-    description: 'Bharat BillPay (BBPS): View current month electricity bill, download statement, pay instantly across all state power DISCOMs, and register power failure complaints.',
-    officialAuthority: 'State Electricity Distribution Companies (DISCOMs)',
-    officialUrl: '',
+    description: 'Bharat BillPay (BBPS) & WBSEDCL: View current month electricity bill, download statement, pay instantly across state power DISCOMs, and register power failure complaints.',
+    officialAuthority: 'State Electricity Distribution Companies (WBSEDCL / DISCOMs)',
+    officialUrl: 'https://www.wbsedcl.in/',
     subcategories: [
       { id: 'elec_pay', nameEn: 'View & Pay Electricity Bill', nameHi: 'बिजली बिल देखें व भुगतान करें', description: 'Instant payment receipt with BBPS transaction reference number.' },
       { id: 'elec_meter', nameEn: 'Apply for New Meter Connection', nameHi: 'नए बिजली मीटर हेतु आवेदन', description: 'Submit domestic or commercial connection request with load sanction.' },
@@ -751,9 +751,9 @@ export const NEW_GOVERNMENT_SERVICES: NewGovernmentService[] = [
     gradientClass: 'bg-gradient-to-b from-[#0277a8] via-[#015173] to-[#002738]',
     borderClass: 'border-[#38bdf8] text-[#38bdf8]',
     badgeColor: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40',
-    description: 'Municipal Corporation Water Tax & Sewerage: View water meter consumption, pay bills with zero surcharge, and apply for water connection repairs.',
-    officialAuthority: 'Municipal Jal Board / Urban Local Bodies (ULBs)',
-    officialUrl: '',
+    description: 'Bharat BillPay (BBPS) & Municipal Water Tax: View water meter consumption, pay bills with zero surcharge, and apply for water connection repairs.',
+    officialAuthority: 'Municipal Jal Board / Urban Local Bodies (ULBs) / BBPS',
+    officialUrl: 'https://www.bharatbillpay.com/',
     subcategories: [
       { id: 'water_pay', nameEn: 'Pay Water Consumption Bill', nameHi: 'जल बिल भुगतान करें', description: 'Instant online bill settlement across Municipal Jal Boards.' },
       { id: 'water_conn', nameEn: 'Apply for New Water Connection', nameHi: 'नया जल कनेक्शन आवेदन', description: 'Domestic pipeline connection application with municipal inspection.' },

@@ -57,11 +57,17 @@ export const NewServiceDetailView: React.FC<NewServiceDetailViewProps> = ({
         </button>
 
         <div className="flex items-center gap-2">
-          {/* Demo Mode Badge required by User Specification */}
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-amber-500/20 text-amber-300 border border-amber-500/50 shadow animate-pulse">
-            <span className="w-2 h-2 rounded-full bg-amber-400"></span>
-            Demo Mode – Link Not Connected
-          </span>
+          {configuredUrl ? (
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-emerald-500/20 text-emerald-300 border border-emerald-500/50 shadow">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              Official Portal Connected
+            </span>
+          ) : (
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-amber-500/20 text-amber-300 border border-amber-500/50 shadow animate-pulse">
+              <span className="w-2 h-2 rounded-full bg-amber-400"></span>
+              Demo Mode – Link Not Connected
+            </span>
+          )}
 
           <span className="px-3 py-1 rounded-full text-xs font-bold bg-blue-900/60 text-blue-200 border border-blue-700/60 hidden sm:inline">
             {service.categoryLabel}
@@ -101,9 +107,15 @@ export const NewServiceDetailView: React.FC<NewServiceDetailViewProps> = ({
           <div className="w-full md:w-80 rounded-2xl bg-[#06102b] border border-blue-800 p-4 space-y-3 shrink-0 shadow-lg">
             <div className="flex items-center justify-between border-b border-blue-900 pb-2">
               <span className="text-xs font-bold text-slate-300">Integration Status</span>
-              <span className="text-[11px] font-black uppercase text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/30">
-                Demo Mode
-              </span>
+              {configuredUrl ? (
+                <span className="text-[11px] font-black uppercase text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded border border-emerald-400/30">
+                  Official Portal
+                </span>
+              ) : (
+                <span className="text-[11px] font-black uppercase text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/30">
+                  Demo Mode
+                </span>
+              )}
             </div>
 
             <div className="space-y-1.5 text-xs text-slate-300">
@@ -128,9 +140,9 @@ export const NewServiceDetailView: React.FC<NewServiceDetailViewProps> = ({
                 href={configuredUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full gold-btn py-2 rounded-xl text-xs font-black shadow flex items-center justify-center gap-1.5 no-underline"
+                className="w-full gold-btn py-2.5 rounded-xl text-xs font-black shadow flex items-center justify-center gap-1.5 no-underline text-slate-950 hover:brightness-110 transition"
               >
-                <span>Launch Connected Portal</span>
+                <span>Launch Official Portal</span>
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>
             ) : (
@@ -238,9 +250,15 @@ export const NewServiceDetailView: React.FC<NewServiceDetailViewProps> = ({
                 <span className="w-6 h-6 rounded-full bg-amber-400/20 text-amber-300 text-xs font-black flex items-center justify-center border border-amber-400/40 shrink-0">
                   {idx + 1}
                 </span>
-                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/10 text-amber-300 border border-amber-500/30">
-                  Demo Facility
-                </span>
+                {configuredUrl ? (
+                  <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/10 text-emerald-300 border border-emerald-500/30">
+                    Official Facility
+                  </span>
+                ) : (
+                  <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/10 text-amber-300 border border-amber-500/30">
+                    Demo Facility
+                  </span>
+                )}
               </div>
 
               <div>
@@ -333,15 +351,36 @@ export const NewServiceDetailView: React.FC<NewServiceDetailViewProps> = ({
               {selectedFacility.description}
             </p>
 
-            <div className="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-xs text-amber-200 space-y-1.5">
-              <div className="flex items-center gap-1.5 font-bold text-amber-400">
-                <AlertCircle className="w-4 h-4" />
-                <span>Demo Mode – Link Not Connected</span>
+            {configuredUrl ? (
+              <div className="p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-xs text-emerald-200 space-y-2">
+                <div className="flex items-center gap-1.5 font-bold text-emerald-400">
+                  <CheckCircle2 className="w-4 h-4" />
+                  <span>Official Government Portal Connected</span>
+                </div>
+                <p className="text-[11px] text-slate-300 leading-normal">
+                  Citizens complete authentication, application submission, and statutory payments directly on the official government website. SAKIM never stores government passwords.
+                </p>
+                <a
+                  href={configuredUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 gold-btn px-4 py-2 rounded-xl text-xs font-black shadow text-slate-950 no-underline hover:brightness-110"
+                >
+                  <span>Open {service.nameEn} Portal</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
               </div>
-              <p className="text-[11px] text-slate-300 leading-normal">
-                Per requirement 5, official government portal links are kept empty for new services until connected by the portal administrator. Mock applications or simulated payments are strictly prohibited.
-              </p>
-            </div>
+            ) : (
+              <div className="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-xs text-amber-200 space-y-1.5">
+                <div className="flex items-center gap-1.5 font-bold text-amber-400">
+                  <AlertCircle className="w-4 h-4" />
+                  <span>Official Portal Pending Connection</span>
+                </div>
+                <p className="text-[11px] text-slate-300 leading-normal">
+                  Official government portal link is pending configuration.
+                </p>
+              </div>
+            )}
 
             <div className="flex items-center justify-end gap-2 pt-2 border-t border-blue-900">
               <button
